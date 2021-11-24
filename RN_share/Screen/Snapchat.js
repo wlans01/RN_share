@@ -8,8 +8,7 @@ import {
   View,
   Pressable,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import StoryThumbnail from "./StoryThumbnail";
+
 import item from "../Cupdata";
 import { useNavigation } from "@react-navigation/core";
 import { SharedElement } from "react-navigation-shared-element";
@@ -134,8 +133,6 @@ const styles = StyleSheet.create({
   cupbox: {
     width: ITEM_SIZE,
     height: ITEM_SIZE * 2.5,
-
-    resizeMode: "contain",
   },
   cupimg: {
     width: "100%",

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
+import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Drag_DropPrat from "../Components/Drag_DropPrat";
@@ -19,9 +19,29 @@ const ITEM_SIZE = SCREENWIDTH / 2.2;
 
 const Parts = ({ route }) => {
   const { uridata, item } = route.params;
-
   const [isDone, setisDone] = useState(false);
   const navigation = useNavigation();
+
+  const [sound, setSound] = React.useState();
+
+  function playSound() {
+    console.log("Loading Sound");
+    const { sound } = Audio.Sound.createAsync(require("../assets/543.mp3"));
+    setSound(sound);
+
+    console.log("Playing Sound");
+    sound.playAsync();
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log("Unloading Sound");
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
+
   const scale = useRef(new Animated.Value(0.5)).current;
   const scale2 = useRef(new Animated.Value(10)).current;
 
@@ -29,6 +49,7 @@ const Parts = ({ route }) => {
   const Done = () => {
     setisDone(true);
     Animated.parallel([small, big]).start(stamp.start());
+    playSound();
   };
 
   const restart = () => {
@@ -38,7 +59,8 @@ const Parts = ({ route }) => {
     scale2.setValue(10);
   };
   const big = Animated.spring(scale, {
-    toValue: 1.7,
+    toValue: 2.5,
+    tension: 1,
     useNativeDriver: true,
   });
 
@@ -115,19 +137,19 @@ const Parts = ({ route }) => {
 
       <Image source={{ uri: uridata }} style={styles.mainimage} />
 
-      <TouchableOpacity
-        style={{ position: "absolute", left: 70 }}
-        onPress={() => restart()}
-      >
-        <Ionicons name="refresh-circle-outline" color="gray" size={98} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ position: "absolute", right: 70 }}
-        onPress={() => navigation.navigate("Snapchat")}
-      >
-        <Ionicons name="home-outline" color="gray" size={85} />
-      </TouchableOpacity>
       {isDone ? (
+        <Animated.Image
+          source={require("../Image/123123.png")}
+          style={{
+            margin: 30,
+            position: "absolute",
+            top: 300,
+            opacity,
+            transform: [{ scale }],
+          }}
+        />
+      ) : null}
+      {/* {isDone ? (
         <Animated.Image
           source={require("../Image/icon.png")}
           style={{
@@ -140,21 +162,19 @@ const Parts = ({ route }) => {
             transform: [{ scale }],
           }}
         />
-      ) : null}
-      {isDone ? (
-        <Animated.Image
-          source={require("../Image/done.png")}
-          style={{
-            width: SCREENWIDTH / 2.5,
-            height: SCREENHEIGHT / 7,
-            margin: 30,
-            position: "absolute",
-
-            opacity: opacity2,
-            transform: [{ scale: scale2 }],
-          }}
-        />
-      ) : null}
+      ) : null} */}
+      {/* <TouchableOpacity
+        style={{ position: "absolute", left: 70 }}
+        onPress={() => restart()}
+      >
+        <Ionicons name="refresh-circle-outline" color="gray" size={98} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ position: "absolute", right: 70 }}
+        onPress={() => navigation.navigate("Snapchat")}
+      >
+        <Ionicons name="home-outline" color="gray" size={85} />
+      </TouchableOpacity> */}
       <View
         style={{
           position: "absolute",
@@ -170,6 +190,12 @@ const Parts = ({ route }) => {
           <Drag_DropPrat item={e} isDone={isDone} key={e.id} />
         ))}
       </View>
+      {isDone ? (
+        <Pressable
+          onPress={() => navigation.navigate("Snapchat")}
+          style={{ width: SCREENWIDTH, height: SCREENHEIGHT }}
+        ></Pressable>
+      ) : null}
     </Animated.View>
   );
 };

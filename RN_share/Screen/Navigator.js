@@ -3,11 +3,12 @@ import { createSharedElementStackNavigator } from "react-navigation-shared-eleme
 import Parts from "./Parts";
 import Snapchat from "./Snapchat";
 import Story from "./Story";
+import StoryThumbnail from "./StoryThumbnail";
 
 const Stack = createSharedElementStackNavigator();
 const Navigator = () => (
   <Stack.Navigator
-    initialRouteName="Snapchat"
+    initialRouteName="StoryThumbnail"
     screenOptions={{
       headerShown: false,
       presentation: "transparentModal",
@@ -24,6 +25,7 @@ const Navigator = () => (
       }}
     />
     <Stack.Screen name="Parts" component={Parts} />
+    <Stack.Screen name="StoryThumbnail" component={StoryThumbnail} />
   </Stack.Navigator>
 );
 
