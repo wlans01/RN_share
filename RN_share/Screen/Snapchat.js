@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   Pressable,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -16,7 +15,8 @@ import { useNavigation } from "@react-navigation/core";
 import { SharedElement } from "react-navigation-shared-element";
 
 const { width: SCREENWIDTH, height: SCREENHEIGHT } = Dimensions.get("window");
-const ITEM_SIZE = SCREENWIDTH / 1.5;
+const ITEM_SIZE = SCREENWIDTH / 2.2;
+const space = 150;
 const Snapchat = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   return (
@@ -43,7 +43,7 @@ const Snapchat = () => {
         data={item}
         horizontal
         contentContainerStyle={{
-          paddingHorizontal: ITEM_SIZE / 4,
+          paddingHorizontal: ITEM_SIZE / 2,
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -58,7 +58,7 @@ const Snapchat = () => {
           ];
           const translateY = scrollX.interpolate({
             inputRange,
-            outputRange: [0, -100, 0],
+            outputRange: [0, -50, 0],
           });
           const zIndex = scrollX.interpolate({
             inputRange,
@@ -133,26 +133,21 @@ const styles = StyleSheet.create({
   },
   cupbox: {
     width: ITEM_SIZE,
-    height: ITEM_SIZE * 1.5,
-    // backgroundColor: "red",
+    height: ITEM_SIZE * 2.5,
 
-    borderRadius: 20,
-    overflow: "visible",
-    // marginHorizontal: -50,
+    resizeMode: "contain",
   },
   cupimg: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
-    borderRadius: 20,
   },
   secondbox: {
     width: 350,
     height: 600,
     position: "absolute",
     zIndex: 30,
-    backgroundColor: "green",
-    borderRadius: 20,
+
     top: 0,
   },
 });

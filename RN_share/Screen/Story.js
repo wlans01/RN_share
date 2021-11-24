@@ -1,13 +1,8 @@
-import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   StyleSheet,
   Dimensions,
-  Animated,
   View,
   Image,
   Pressable,
@@ -15,22 +10,18 @@ import {
   FlatList,
 } from "react-native";
 
-import { PanGestureHandler } from "react-native-gesture-handler";
-
 import { Ionicons } from "@expo/vector-icons";
 import { SharedElement } from "react-navigation-shared-element";
 import Drag_Drop from "../Components/Drag_Drop";
-import Drag_DropPrat from "../Components/Drag_DropPrat";
 
 const { width: SCREENWIDTH, height: SCREENHEIGHT } = Dimensions.get("window");
-const ITEM_SIZE = SCREENWIDTH / 1.5;
+const ITEM_SIZE = SCREENWIDTH / 2.2;
 
 const Story = ({ route }) => {
   const navigation = useNavigation();
   const { item } = route.params;
   const [imguri, setimguri] = useState(item.uri);
 
-  const [isDone, setisDone] = useState(false);
   const changeimg = (uri) => {
     setimguri(uri);
   };
@@ -135,8 +126,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: ITEM_SIZE,
-    height: ITEM_SIZE * 1.5,
-    borderRadius: 20,
+    height: ITEM_SIZE * 2.5,
+
     resizeMode: "contain",
     bottom: -40,
   },

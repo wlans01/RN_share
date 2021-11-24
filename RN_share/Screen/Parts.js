@@ -13,14 +13,13 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Drag_DropPrat from "../Components/Drag_DropPrat";
-import { SharedElement } from "react-navigation-shared-element";
+
 const { width: SCREENWIDTH, height: SCREENHEIGHT } = Dimensions.get("window");
-const ITEM_SIZE = SCREENWIDTH / 1.5;
+const ITEM_SIZE = SCREENWIDTH / 2.2;
 
 const Parts = ({ route }) => {
   const { uridata, item } = route.params;
 
-  const [imguri, setimguri] = useState(uridata);
   const [isDone, setisDone] = useState(false);
   const navigation = useNavigation();
   const scale = useRef(new Animated.Value(0.5)).current;
@@ -114,13 +113,19 @@ const Parts = ({ route }) => {
         </View>
       </Animated.View>
 
-      <Image source={{ uri: imguri }} style={styles.mainimage} />
+      <Image source={{ uri: uridata }} style={styles.mainimage} />
 
       <TouchableOpacity
         style={{ position: "absolute", left: 70 }}
         onPress={() => restart()}
       >
         <Ionicons name="refresh-circle-outline" color="gray" size={98} />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ position: "absolute", right: 70 }}
+        onPress={() => navigation.navigate("Snapchat")}
+      >
+        <Ionicons name="home-outline" color="gray" size={85} />
       </TouchableOpacity>
       {isDone ? (
         <Animated.Image
@@ -156,8 +161,8 @@ const Parts = ({ route }) => {
           flexDirection: "row",
           alignItems: "center",
           flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          bottom: 50,
+          justifyContent: "center",
+          bottom: 30,
           width: SCREENWIDTH,
         }}
       >
@@ -182,9 +187,9 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     width: ITEM_SIZE,
-    height: ITEM_SIZE * 1.5,
-    borderRadius: 20,
+    height: ITEM_SIZE * 2.5,
+
     resizeMode: "contain",
-    bottom: 200,
+    bottom: 145,
   },
 });

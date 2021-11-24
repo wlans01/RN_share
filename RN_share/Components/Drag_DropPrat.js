@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 const { width: SCREENWIDTH, height: SCREENHEIGHT } = Dimensions.get("window");
-const ITEM_SIZE = SCREENWIDTH / 8;
+const ITEM_SIZE = SCREENWIDTH / 6.5;
 const Drag_DropPrat = ({ item, changeimg, isDone }) => {
   //values
 
@@ -83,13 +83,10 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
-    margin: 10,
   },
   iconimg: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
-    borderRadius: 20,
   },
 });

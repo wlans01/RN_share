@@ -11,7 +11,6 @@ const Navigator = () => (
     screenOptions={{
       headerShown: false,
       presentation: "transparentModal",
-
       animationTypeForReplace: "push",
     }}
   >
