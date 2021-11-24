@@ -12,7 +12,7 @@ const Navigator = () => (
       headerShown: false,
       presentation: "transparentModal",
 
-      animationTypeForReplace: "pop",
+      animationTypeForReplace: "push",
     }}
   >
     <Stack.Screen name="Snapchat" component={Snapchat} />
@@ -24,14 +24,7 @@ const Navigator = () => (
         return [`item.${item.id}.uri`];
       }}
     />
-    <Stack.Screen
-      name="Parts"
-      component={Parts}
-      sharedElements={(route) => {
-        const { item } = route.params;
-        return [`item.${item.id}.uri`];
-      }}
-    />
+    <Stack.Screen name="Parts" component={Parts} />
   </Stack.Navigator>
 );
 

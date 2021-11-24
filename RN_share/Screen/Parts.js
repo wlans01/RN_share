@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   Dimensions,
-  FlatList,
   Image,
   Pressable,
   StyleSheet,
@@ -73,62 +72,49 @@ const Parts = ({ route }) => {
   });
   return (
     <Animated.View style={{ ...styles.contianer }}>
-      <SharedElement id={`item.${item.id}.uri`} style={{ flex: 1 }}>
-        <Animated.View
-          style={{
-            flex: 1,
-            width: SCREENWIDTH,
-            opacity: isDone ? 0 : 1,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "baseline",
-              justifyContent: "center",
-            }}
-          >
-            <Pressable onPress={() => navigation.goBack()}>
-              <Ionicons name="chevron-back-sharp" color="black" size={98} />
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate("Snapchat")}>
-              <Image
-                source={require("../Image/icon.png")}
-                style={{
-                  width: SCREENWIDTH / 2.5,
-                  height: SCREENHEIGHT / 7,
-                  margin: 30,
-                  overflow: "visible",
-                }}
-              />
-            </Pressable>
-            <Pressable onPress={() => Done()}>
-              <Ionicons name="chevron-forward-sharp" color="black" size={98} />
-            </Pressable>
-          </View>
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ fontSize: 36, marginTop: -20 }}>
-              컵을 꾸며보세요
-            </Text>
-          </View>
-        </Animated.View>
-      </SharedElement>
-      <SharedElement
-        id={`item.${item.id}.uri`}
+      <Animated.View
         style={{
-          position: "absolute",
-
-          alignItems: "center",
-          justifyContent: "center",
+          flex: 1,
+          width: SCREENWIDTH,
+          opacity: isDone ? 0 : 1,
         }}
       >
-        <Image source={{ uri: imguri }} style={styles.mainimage} />
-      </SharedElement>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "baseline",
+            justifyContent: "center",
+          }}
+        >
+          <Pressable onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back-sharp" color="black" size={98} />
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Snapchat")}>
+            <Image
+              source={require("../Image/icon.png")}
+              style={{
+                width: SCREENWIDTH / 2.5,
+                height: SCREENHEIGHT / 7,
+                margin: 30,
+                overflow: "visible",
+              }}
+            />
+          </Pressable>
+          <Pressable onPress={() => Done()}>
+            <Ionicons name="chevron-forward-sharp" color="black" size={98} />
+          </Pressable>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ fontSize: 36, marginTop: -20 }}>컵을 꾸며보세요</Text>
+        </View>
+      </Animated.View>
+
+      <Image source={{ uri: imguri }} style={styles.mainimage} />
 
       <TouchableOpacity
         style={{ position: "absolute", left: 70 }}
@@ -199,6 +185,6 @@ const styles = StyleSheet.create({
     height: ITEM_SIZE * 1.5,
     borderRadius: 20,
     resizeMode: "contain",
-    top: -360,
+    bottom: 200,
   },
 });
